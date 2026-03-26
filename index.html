@@ -19,7 +19,7 @@
             margin: 0;
         }
         </style>
-        <title>Peta Database Air Tanah Provinsi Sulawesi Barat</title>
+        <title>PETA DATABASE AIR TANAH PROVINSI SULAWESI BARAT</title>
     </head>
     <body>
         <div id="map">
@@ -43,7 +43,7 @@
         <script>
         var map = L.map('map', {
             zoomControl:false, maxZoom:28, minZoom:1
-        }).fitBounds([[-3.3077903785291625,119.11348622122888],[-2.686737397787452,120.3602793750198]]);
+        }).fitBounds([[-3.147909992489539,118.27031368210962],[-2.0150192426269067,120.54464530070177]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -115,7 +115,7 @@
             return this._div;
         };
         title.update = function () {
-            this._div.innerHTML = '<h2>Peta Database Air Tanah Provinsi Sulawesi Barat</h2>';
+            this._div.innerHTML = '<h2>PETA DATABASE AIR TANAH PROVINSI SULAWESI BARAT</h2>';
         };
         title.addTo(map);
         var abstract = new L.Control({'position':'topright'});
@@ -130,7 +130,7 @@
             abstract.show = function () {
                 this._div.classList.remove("abstract");
                 this._div.classList.add("abstractUncollapsed");
-                this._div.innerHTML = 'Peta ini menyediakan data-data hasil penyelidikan air tanah di Provinsi Sulawesi Barat yang dilakukan oleh Tim dari Bidang Geologi dan Air Bawah Tanah Dinas Energi dan Sumber Daya Mineral Daerah Pemerintah Provinsi Sulawesi Barat';
+                this._div.innerHTML = 'Peta ini menyediakan data-data hasil penyelidikan air tanah di Provinsi Sulawesi Barat yang dilaksanakan oleh TIM dari Bidang Geologi dan Air Bawah Tanah Dinas Energi dan Sumber Daya Mineral Daerah Pemerintah Provinsi Sulawesi Barat';
         };
         abstract.addTo(map);
         var zoomControl = L.control.zoom({
@@ -155,8 +155,10 @@
         function pop_BtsKABUPATENSULBAR_1(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
-                        <th scope="row">NAMA</th>\
-                        <td>' + (feature.properties['NAMA'] !== null ? autolinker.link(String(feature.properties['NAMA']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['NAMA'] !== null ? autolinker.link(String(feature.properties['NAMA']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['LUAS'] !== null ? autolinker.link(String(feature.properties['LUAS']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
@@ -170,28 +172,36 @@
             return {
                 pane: 'pane_BtsKABUPATENSULBAR_1',
                 opacity: 1,
-                color: 'rgba(237,10,10,1.0)',
+                color: 'rgba(227,26,28,1.0)',
                 dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 3.0, 
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        function style_BtsKABUPATENSULBAR_1_1() {
+            return {
+                pane: 'pane_BtsKABUPATENSULBAR_1',
+                stroke: false, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(131,240,80,0.0)',
-                interactive: true,
+                fillColor: 'rgba(255,6,39,0.34901960784313724)',
+                interactive: false,
             }
         }
         map.createPane('pane_BtsKABUPATENSULBAR_1');
         map.getPane('pane_BtsKABUPATENSULBAR_1').style.zIndex = 401;
         map.getPane('pane_BtsKABUPATENSULBAR_1').style['mix-blend-mode'] = 'normal';
-        var layer_BtsKABUPATENSULBAR_1 = new L.geoJson(json_BtsKABUPATENSULBAR_1, {
+        var layer_BtsKABUPATENSULBAR_1 = new L.geoJson.multiStyle(json_BtsKABUPATENSULBAR_1, {
             attribution: '',
-            interactive: true,
+            interactive: false,
             dataVar: 'json_BtsKABUPATENSULBAR_1',
             layerName: 'layer_BtsKABUPATENSULBAR_1',
             pane: 'pane_BtsKABUPATENSULBAR_1',
             onEachFeature: pop_BtsKABUPATENSULBAR_1,
-            style: style_BtsKABUPATENSULBAR_1_0,
+            styles: [style_BtsKABUPATENSULBAR_1_0,style_BtsKABUPATENSULBAR_1_1,]
         });
         bounds_group.addLayer(layer_BtsKABUPATENSULBAR_1);
         map.addLayer(layer_BtsKABUPATENSULBAR_1);
@@ -202,7 +212,7 @@
                         <td>' + (feature.properties['Nama'] !== null ? autolinker.link(String(feature.properties['Nama']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Luas</th>\
+                        <th scope="row">Luas (Dalam Ha)</th>\
                         <td>' + (feature.properties['Luas'] !== null ? autolinker.link(String(feature.properties['Luas']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
@@ -214,9 +224,9 @@
         }
 
         var pattern_CAT_SULBAR_2_0 = new L.StripePattern({
-            weight: 0.3,
+            weight: 0.8999999999999999,
             spaceWeight: 2.0,
-            color: '#1e3ef1',
+            color: '#1326f3',
             opacity: 1.0,
             spaceOpacity: 0,
             angle: 315
@@ -235,11 +245,11 @@
             return {
                 pane: 'pane_CAT_SULBAR_2',
                 opacity: 1,
-                color: 'rgba(30,62,241,1.0)',
+                color: 'rgba(19,38,243,1.0)',
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
-                weight: 2.0,
+                weight: 3.0,
                 fillOpacity: 0,
                 interactive: true,
             }
@@ -269,12 +279,12 @@
                         <td>' + (feature.properties['Lokasi'] !== null ? autolinker.link(String(feature.properties['Lokasi']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Panjang Lintasan</th>\
-                        <td>' + (feature.properties['Panjang Lintasan'] !== null ? autolinker.link(String(feature.properties['Panjang Lintasan']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                        <th scope="row">Panjang Li</th>\
+                        <td>' + (feature.properties['Panjang Li'] !== null ? autolinker.link(String(feature.properties['Panjang Li']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Arah Bentangan</th>\
-                        <td>' + (feature.properties['Arah Bentangan'] !== null ? autolinker.link(String(feature.properties['Arah Bentangan']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                        <th scope="row">Arah Bentangan </th>\
+                        <td>' + (feature.properties['Arah Benta'] !== null ? autolinker.link(String(feature.properties['Arah Benta']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Jenis Data</th>\
@@ -291,7 +301,7 @@
         function style_DataGeolistrik_3_0() {
             return {
                 pane: 'pane_DataGeolistrik_3',
-                radius: 4.0,
+                radius: 3.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -300,7 +310,7 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(72,100,183,1.0)',
+                fillColor: 'rgba(145,82,45,1.0)',
                 interactive: true,
             }
         }
@@ -327,20 +337,16 @@
         function pop_DataSumur_4(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
-                        <th scope="row">Kabupaten</th>\
-                        <td>' + (feature.properties['Kabupaten'] !== null ? autolinker.link(String(feature.properties['Kabupaten']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
                         <th scope="row">Tahun</th>\
                         <td>' + (feature.properties['Tahun'] !== null ? autolinker.link(String(feature.properties['Tahun']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Nama Lokasi</th>\
-                        <td>' + (feature.properties['Nama Lokasi'] !== null ? autolinker.link(String(feature.properties['Nama Lokasi']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                        <th scope="row">Lokasi</th>\
+                        <td>' + (feature.properties['Nama Lokas'] !== null ? autolinker.link(String(feature.properties['Nama Lokas']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Kategori Sumur</th>\
-                        <td>' + (feature.properties['Kategori Sumur'] !== null ? autolinker.link(String(feature.properties['Kategori Sumur']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                        <th scope="row">Jenis Sumur</th>\
+                        <td>' + (feature.properties['Kategori S'] !== null ? autolinker.link(String(feature.properties['Kategori S']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Warna</th>\
@@ -371,12 +377,8 @@
                         <td>' + (feature.properties['DO'] !== null ? autolinker.link(String(feature.properties['DO']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Kedalaman</th>\
-                        <td>' + (feature.properties['Kedalaman'] !== null ? autolinker.link(String(feature.properties['Kedalaman']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Muka Air Tanah</th>\
-                        <td>' + (feature.properties['Muka Air Tanah'] !== null ? autolinker.link(String(feature.properties['Muka Air Tanah']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                        <th scope="row">Muka Air Tanah (Satuan m)</th>\
+                        <td>' + (feature.properties['Muka Air T'] !== null ? autolinker.link(String(feature.properties['Muka Air T']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
@@ -389,7 +391,7 @@
         function style_DataSumur_4_0() {
             return {
                 pane: 'pane_DataSumur_4',
-                radius: 4.0,
+                radius: 3.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -398,7 +400,7 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(232,113,141,1.0)',
+                fillColor: 'rgba(133,182,111,1.0)',
                 interactive: true,
             }
         }
@@ -445,7 +447,7 @@
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((exp_label_BtsKABUPATENSULBAR_1_eval_expression(context) !== null?String('<div style="color: #ffffff; font-size: 10pt; font-weight: bold; font-family: \'Arial\', sans-serif;">' + exp_label_BtsKABUPATENSULBAR_1_eval_expression(context)) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_BtsKABUPATENSULBAR_1'});
+            layer.bindTooltip((layer.feature.properties['NAMA'] !== null?String('<div style="color: #ffffff; font-size: 10pt; font-weight: bold; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['NAMA']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_BtsKABUPATENSULBAR_1'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
@@ -458,7 +460,7 @@
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((layer.feature.properties['Nama'] !== null?String('<div style="color: #0d4bf3; font-size: 10pt; font-weight: bold; font-family: \'Arial\', sans-serif;">' + layer.feature.properties['Nama']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_CAT_SULBAR_2'});
+            layer.bindTooltip((layer.feature.properties['Nama'] !== null?String('<div style="color: #ffffff; font-size: 10pt; font-weight: bold; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['Nama']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_CAT_SULBAR_2'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
