@@ -28,6 +28,7 @@
         <script src="js/leaflet.js"></script>
         <script src="js/L.Control.Layers.Tree.min.js"></script>
         <script src="js/multi-style-layer.js"></script>
+        <script src="js/leaflet-svg-shape-markers.min.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
         <script src="js/leaflet.pattern.js"></script>
         <script src="js/leaflet-hash.js"></script>
@@ -36,14 +37,15 @@
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
         <script src="js/leaflet.photon.js"></script>
-        <script src="data/BtsKABUPATENSULBAR_1.js"></script>
-        <script src="data/CAT_SULBAR_2.js"></script>
-        <script src="data/DataGeolistrik_3.js"></script>
-        <script src="data/DataSumur_4.js"></script>
+        <script src="data/BatasKecamatan_1.js"></script>
+        <script src="data/BatasKabupaten_2.js"></script>
+        <script src="data/CekunganAirTanah_3.js"></script>
+        <script src="data/DataGeolistrik_4.js"></script>
+        <script src="data/DataSumur_5.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:false, maxZoom:28, minZoom:1
-        }).fitBounds([[-3.147909992489539,118.27031368210962],[-2.0150192426269067,120.54464530070177]]);
+        }).fitBounds([[-2.474696847931027,119.05594009865702],[-2.1249444431719637,119.75808454896578]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -152,13 +154,19 @@
         });
         layer_GoogleSatellite_0;
         map.addLayer(layer_GoogleSatellite_0);
-        function pop_BtsKABUPATENSULBAR_1(feature, layer) {
+        function pop_BatasKecamatan_1(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['NAMA'] !== null ? autolinker.link(String(feature.properties['NAMA']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                        <th scope="row">Nama </th>\
+                        <td>' + (feature.properties['NAMOBJ'] !== null ? autolinker.link(String(feature.properties['NAMOBJ']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['LUAS'] !== null ? autolinker.link(String(feature.properties['LUAS']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                        <th scope="row">Kabupaten</th>\
+                        <td>' + (feature.properties['WADMKK'] !== null ? autolinker.link(String(feature.properties['WADMKK']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Provinsi</th>\
+                        <td>' + (feature.properties['WADMPR'] !== null ? autolinker.link(String(feature.properties['WADMPR']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
@@ -168,44 +176,83 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_BtsKABUPATENSULBAR_1_0() {
+        function style_BatasKecamatan_1_0() {
             return {
-                pane: 'pane_BtsKABUPATENSULBAR_1',
+                pane: 'pane_BatasKecamatan_1',
                 opacity: 1,
-                color: 'rgba(227,26,28,1.0)',
+                color: 'rgba(51,160,44,0.7)',
+                dashArray: '10.0,2.0,4.0,2.0',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BatasKecamatan_1');
+        map.getPane('pane_BatasKecamatan_1').style.zIndex = 401;
+        map.getPane('pane_BatasKecamatan_1').style['mix-blend-mode'] = 'normal';
+        var layer_BatasKecamatan_1 = new L.geoJson(json_BatasKecamatan_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BatasKecamatan_1',
+            layerName: 'layer_BatasKecamatan_1',
+            pane: 'pane_BatasKecamatan_1',
+            onEachFeature: pop_BatasKecamatan_1,
+            style: style_BatasKecamatan_1_0,
+        });
+        bounds_group.addLayer(layer_BatasKecamatan_1);
+        map.addLayer(layer_BatasKecamatan_1);
+        function pop_BatasKabupaten_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">NAMA</th>\
+                        <td>' + (feature.properties['NAMA'] !== null ? autolinker.link(String(feature.properties['NAMA']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_BatasKabupaten_2_0() {
+            return {
+                pane: 'pane_BatasKabupaten_2',
+                opacity: 1,
+                color: 'rgba(227,26,28,0.8)',
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
-                weight: 4.0,
+                weight: 3.0,
                 fillOpacity: 0,
-                interactive: false,
+                interactive: true,
             }
         }
-        function style_BtsKABUPATENSULBAR_1_1() {
+        function style_BatasKabupaten_2_1() {
             return {
-                pane: 'pane_BtsKABUPATENSULBAR_1',
+                pane: 'pane_BatasKabupaten_2',
                 stroke: false, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(255,6,39,0.34901960784313724)',
-                interactive: false,
+                fillOpacity: 0,
+                interactive: true,
             }
         }
-        map.createPane('pane_BtsKABUPATENSULBAR_1');
-        map.getPane('pane_BtsKABUPATENSULBAR_1').style.zIndex = 401;
-        map.getPane('pane_BtsKABUPATENSULBAR_1').style['mix-blend-mode'] = 'normal';
-        var layer_BtsKABUPATENSULBAR_1 = new L.geoJson.multiStyle(json_BtsKABUPATENSULBAR_1, {
+        map.createPane('pane_BatasKabupaten_2');
+        map.getPane('pane_BatasKabupaten_2').style.zIndex = 402;
+        map.getPane('pane_BatasKabupaten_2').style['mix-blend-mode'] = 'normal';
+        var layer_BatasKabupaten_2 = new L.geoJson.multiStyle(json_BatasKabupaten_2, {
             attribution: '',
-            interactive: false,
-            dataVar: 'json_BtsKABUPATENSULBAR_1',
-            layerName: 'layer_BtsKABUPATENSULBAR_1',
-            pane: 'pane_BtsKABUPATENSULBAR_1',
-            onEachFeature: pop_BtsKABUPATENSULBAR_1,
-            styles: [style_BtsKABUPATENSULBAR_1_0,style_BtsKABUPATENSULBAR_1_1,]
+            interactive: true,
+            dataVar: 'json_BatasKabupaten_2',
+            layerName: 'layer_BatasKabupaten_2',
+            pane: 'pane_BatasKabupaten_2',
+            onEachFeature: pop_BatasKabupaten_2,
+            styles: [style_BatasKabupaten_2_0,style_BatasKabupaten_2_1,]
         });
-        bounds_group.addLayer(layer_BtsKABUPATENSULBAR_1);
-        map.addLayer(layer_BtsKABUPATENSULBAR_1);
-        function pop_CAT_SULBAR_2(feature, layer) {
+        bounds_group.addLayer(layer_BatasKabupaten_2);
+        map.addLayer(layer_BatasKabupaten_2);
+        function pop_CekunganAirTanah_3(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">Nama</th>\
@@ -223,52 +270,49 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        var pattern_CAT_SULBAR_2_0 = new L.StripePattern({
-            weight: 0.8999999999999999,
-            spaceWeight: 2.0,
-            color: '#1326f3',
-            opacity: 1.0,
-            spaceOpacity: 0,
-            angle: 315
-        });
-        pattern_CAT_SULBAR_2_0.addTo(map);
-        function style_CAT_SULBAR_2_0() {
+        function style_CekunganAirTanah_3_0() {
             return {
-                pane: 'pane_CAT_SULBAR_2',
-                stroke: false,
+                pane: 'pane_CekunganAirTanah_3',
+                opacity: 1,
+                color: 'rgba(38,89,128,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
                 fillOpacity: 1,
-                fillPattern: pattern_CAT_SULBAR_2_0,
+                fillColor: 'rgba(55,126,184,0.17254901960784313)',
                 interactive: true,
             }
         }
-        function style_CAT_SULBAR_2_1() {
+        function style_CekunganAirTanah_3_1() {
             return {
-                pane: 'pane_CAT_SULBAR_2',
+                pane: 'pane_CekunganAirTanah_3',
                 opacity: 1,
-                color: 'rgba(19,38,243,1.0)',
+                color: 'rgba(35,35,255,1.0)',
                 dashArray: '',
-                lineCap: 'square',
-                lineJoin: 'bevel',
-                weight: 3.0,
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
                 fillOpacity: 0,
                 interactive: true,
             }
         }
-        map.createPane('pane_CAT_SULBAR_2');
-        map.getPane('pane_CAT_SULBAR_2').style.zIndex = 402;
-        map.getPane('pane_CAT_SULBAR_2').style['mix-blend-mode'] = 'normal';
-        var layer_CAT_SULBAR_2 = new L.geoJson.multiStyle(json_CAT_SULBAR_2, {
+        map.createPane('pane_CekunganAirTanah_3');
+        map.getPane('pane_CekunganAirTanah_3').style.zIndex = 403;
+        map.getPane('pane_CekunganAirTanah_3').style['mix-blend-mode'] = 'normal';
+        var layer_CekunganAirTanah_3 = new L.geoJson.multiStyle(json_CekunganAirTanah_3, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_CAT_SULBAR_2',
-            layerName: 'layer_CAT_SULBAR_2',
-            pane: 'pane_CAT_SULBAR_2',
-            onEachFeature: pop_CAT_SULBAR_2,
-            styles: [style_CAT_SULBAR_2_0,style_CAT_SULBAR_2_1,]
+            dataVar: 'json_CekunganAirTanah_3',
+            layerName: 'layer_CekunganAirTanah_3',
+            pane: 'pane_CekunganAirTanah_3',
+            onEachFeature: pop_CekunganAirTanah_3,
+            styles: [style_CekunganAirTanah_3_0,style_CekunganAirTanah_3_1,]
         });
-        bounds_group.addLayer(layer_CAT_SULBAR_2);
-        map.addLayer(layer_CAT_SULBAR_2);
-        function pop_DataGeolistrik_3(feature, layer) {
+        bounds_group.addLayer(layer_CekunganAirTanah_3);
+        map.addLayer(layer_CekunganAirTanah_3);
+        function pop_DataGeolistrik_4(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">Tahun</th>\
@@ -298,43 +342,65 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_DataGeolistrik_3_0() {
+        function style_DataGeolistrik_4_0() {
             return {
-                pane: 'pane_DataGeolistrik_3',
-                radius: 3.0,
+                pane: 'pane_DataGeolistrik_4',
+                radius: 4.76666,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(184,8,8,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 1.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(145,82,45,1.0)',
+                fillColor: 'rgba(246,206,6,1.0)',
                 interactive: true,
             }
         }
-        map.createPane('pane_DataGeolistrik_3');
-        map.getPane('pane_DataGeolistrik_3').style.zIndex = 403;
-        map.getPane('pane_DataGeolistrik_3').style['mix-blend-mode'] = 'normal';
-        var layer_DataGeolistrik_3 = new L.geoJson(json_DataGeolistrik_3, {
+        function style_DataGeolistrik_4_1() {
+            return {
+                pane: 'pane_DataGeolistrik_4',
+                radius: 5.2,
+                opacity: 1,
+                color: 'rgba(255,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(246,206,6,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_DataGeolistrik_4');
+        map.getPane('pane_DataGeolistrik_4').style.zIndex = 404;
+        map.getPane('pane_DataGeolistrik_4').style['mix-blend-mode'] = 'normal';
+        var layer_DataGeolistrik_4 = new L.geoJson.multiStyle(json_DataGeolistrik_4, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_DataGeolistrik_3',
-            layerName: 'layer_DataGeolistrik_3',
-            pane: 'pane_DataGeolistrik_3',
-            onEachFeature: pop_DataGeolistrik_3,
-            pointToLayer: function (feature, latlng) {
+            dataVar: 'json_DataGeolistrik_4',
+            layerName: 'layer_DataGeolistrik_4',
+            pane: 'pane_DataGeolistrik_4',
+            onEachFeature: pop_DataGeolistrik_4,
+            pointToLayers: [function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_DataGeolistrik_3_0(feature));
+                return L.shapeMarker(latlng, style_DataGeolistrik_4_0(feature));
+            },function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_DataGeolistrik_4_1(feature));
             },
-        });
-        bounds_group.addLayer(layer_DataGeolistrik_3);
-        map.addLayer(layer_DataGeolistrik_3);
-        function pop_DataSumur_4(feature, layer) {
+        ]});
+        bounds_group.addLayer(layer_DataGeolistrik_4);
+        map.addLayer(layer_DataGeolistrik_4);
+        function pop_DataSumur_5(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">Tahun</th>\
@@ -388,10 +454,12 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_DataSumur_4_0() {
-            return {
-                pane: 'pane_DataSumur_4',
-                radius: 3.0,
+        function style_DataSumur_5_0(feature) {
+            switch(String(feature.properties['Kategori S'])) {
+                case 'Mata Air':
+                    return {
+                pane: 'pane_DataSumur_5',
+                radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -400,35 +468,70 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(133,182,111,1.0)',
+                fillColor: 'rgba(179,96,223,1.0)',
                 interactive: true,
             }
+                    break;
+                case 'Sumur Bor':
+                    return {
+                pane: 'pane_DataSumur_5',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(201,72,91,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Sumur Gali':
+                    return {
+                pane: 'pane_DataSumur_5',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(211,218,69,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
         }
-        map.createPane('pane_DataSumur_4');
-        map.getPane('pane_DataSumur_4').style.zIndex = 404;
-        map.getPane('pane_DataSumur_4').style['mix-blend-mode'] = 'normal';
-        var layer_DataSumur_4 = new L.geoJson(json_DataSumur_4, {
+        map.createPane('pane_DataSumur_5');
+        map.getPane('pane_DataSumur_5').style.zIndex = 405;
+        map.getPane('pane_DataSumur_5').style['mix-blend-mode'] = 'normal';
+        var layer_DataSumur_5 = new L.geoJson(json_DataSumur_5, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_DataSumur_4',
-            layerName: 'layer_DataSumur_4',
-            pane: 'pane_DataSumur_4',
-            onEachFeature: pop_DataSumur_4,
+            dataVar: 'json_DataSumur_5',
+            layerName: 'layer_DataSumur_5',
+            pane: 'pane_DataSumur_5',
+            onEachFeature: pop_DataSumur_5,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_DataSumur_4_0(feature));
+                return L.circleMarker(latlng, style_DataSumur_5_0(feature));
             },
         });
-        bounds_group.addLayer(layer_DataSumur_4);
-        map.addLayer(layer_DataSumur_4);
+        bounds_group.addLayer(layer_DataSumur_5);
+        map.addLayer(layer_DataSumur_5);
         var overlaysTree = [
-            {label: '<img src="legend/DataSumur_4.png" /> Data Sumur', layer: layer_DataSumur_4},
-            {label: '<img src="legend/DataGeolistrik_3.png" /> Data Geolistrik', layer: layer_DataGeolistrik_3},
-            {label: '<img src="legend/CAT_SULBAR_2.png" /> CAT_SULBAR', layer: layer_CAT_SULBAR_2},
-            {label: '<img src="legend/BtsKABUPATENSULBAR_1.png" /> Bts KABUPATEN SULBAR', layer: layer_BtsKABUPATENSULBAR_1},
+            {label: 'Data Sumur<br /><table><tr><td style="text-align: center;"><img src="legend/DataSumur_5_MataAir0.png" /></td><td>Mata Air</td></tr><tr><td style="text-align: center;"><img src="legend/DataSumur_5_SumurBor1.png" /></td><td>Sumur Bor</td></tr><tr><td style="text-align: center;"><img src="legend/DataSumur_5_SumurGali2.png" /></td><td>Sumur Gali</td></tr></table>', layer: layer_DataSumur_5},
+            {label: '<img src="legend/DataGeolistrik_4.png" /> Data Geolistrik', layer: layer_DataGeolistrik_4},
+            {label: '<img src="legend/CekunganAirTanah_3.png" /> Cekungan Air Tanah', layer: layer_CekunganAirTanah_3},
+            {label: '<img src="legend/BatasKabupaten_2.png" /> Batas Kabupaten', layer: layer_BatasKabupaten_2},
+            {label: '<img src="legend/BatasKecamatan_1.png" /> Batas Kecamatan', layer: layer_BatasKecamatan_1},
             {label: "Google Satellite", layer: layer_GoogleSatellite_0},]
         var lay = L.control.layers.tree(null, overlaysTree,{
             //namedToggle: true,
@@ -437,17 +540,67 @@
             //openedSymbol: '&#8863; &#x1f5c1;',
             //collapseAll: 'Collapse all',
             //expandAll: 'Expand all',
-            collapsed: true,
+            collapsed: false, 
         });
         lay.addTo(map);
+		document.addEventListener("DOMContentLoaded", function() {
+            // set new Layers List height which considers toggle icon
+            function newLayersListHeight() {
+                var layerScrollbarElement = document.querySelector('.leaflet-control-layers-scrollbar');
+                if (layerScrollbarElement) {
+                    var layersListElement = document.querySelector('.leaflet-control-layers-list');
+                    var originalHeight = layersListElement.style.height 
+                        || window.getComputedStyle(layersListElement).height;
+                    var newHeight = parseFloat(originalHeight) - 50;
+                    layersListElement.style.height = newHeight + 'px';
+                }
+            }
+            var isLayersListExpanded = true;
+            var controlLayersElement = document.querySelector('.leaflet-control-layers');
+            var toggleLayerControl = document.querySelector('.leaflet-control-layers-toggle');
+            // toggle Collapsed/Expanded and apply new Layers List height
+            toggleLayerControl.addEventListener('click', function() {
+                if (isLayersListExpanded) {
+                    controlLayersElement.classList.remove('leaflet-control-layers-expanded');
+                } else {
+                    controlLayersElement.classList.add('leaflet-control-layers-expanded');
+                }
+                isLayersListExpanded = !isLayersListExpanded;
+                newLayersListHeight()
+            });	
+			// apply new Layers List height if toggle layerstree
+			if (controlLayersElement) {
+				controlLayersElement.addEventListener('click', function(event) {
+					var toggleLayerHeaderPointer = event.target.closest('.leaflet-layerstree-header-pointer span');
+					if (toggleLayerHeaderPointer) {
+						newLayersListHeight();
+					}
+				});
+			}
+            // Collapsed/Expanded at Start to apply new height
+            setTimeout(function() {
+                toggleLayerControl.click();
+            }, 10);
+            setTimeout(function() {
+                toggleLayerControl.click();
+            }, 10);
+            // Collapsed touch/small screen
+            var isSmallScreen = window.innerWidth < 650;
+            if (isSmallScreen) {
+                setTimeout(function() {
+                    controlLayersElement.classList.remove('leaflet-control-layers-expanded');
+                    isLayersListExpanded = !isLayersListExpanded;
+                }, 500);
+            }  
+        });       
         setBounds();
         var i = 0;
-        layer_BtsKABUPATENSULBAR_1.eachLayer(function(layer) {
+        layer_BatasKecamatan_1.eachLayer(function(layer) {
             var context = {
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((layer.feature.properties['NAMA'] !== null?String('<div style="color: #ffffff; font-size: 10pt; font-weight: bold; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['NAMA']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_BtsKABUPATENSULBAR_1'});
+            layer.bindTooltip((layer.feature.properties['NAMOBJ'] !== null?String('<div style="color: #fbfbfb; font-size: 11pt; font-weight: bold; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['NAMOBJ']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_BatasKecamatan_1'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
@@ -455,27 +608,40 @@
               i++;
         });
         var i = 0;
-        layer_CAT_SULBAR_2.eachLayer(function(layer) {
+        layer_BatasKabupaten_2.eachLayer(function(layer) {
             var context = {
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((layer.feature.properties['Nama'] !== null?String('<div style="color: #ffffff; font-size: 10pt; font-weight: bold; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['Nama']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_CAT_SULBAR_2'});
+            layer.bindTooltip((layer.feature.properties['NAMA'] !== null?String('<div style="color: #ffffff; font-size: 10pt; font-weight: bold; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['NAMA']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_BatasKabupaten_2'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
               addLabel(layer, i);
               i++;
         });
-        resetLabels([layer_BtsKABUPATENSULBAR_1,layer_CAT_SULBAR_2]);
+        var i = 0;
+        layer_CekunganAirTanah_3.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Nama'] !== null?String('<div style="color: #ffffff; font-size: 10pt; font-weight: bold; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['Nama']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_CekunganAirTanah_3'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_BatasKecamatan_1,layer_BatasKabupaten_2,layer_CekunganAirTanah_3]);
         map.on("zoomend", function(){
-            resetLabels([layer_BtsKABUPATENSULBAR_1,layer_CAT_SULBAR_2]);
+            resetLabels([layer_BatasKecamatan_1,layer_BatasKabupaten_2,layer_CekunganAirTanah_3]);
         });
         map.on("layeradd", function(){
-            resetLabels([layer_BtsKABUPATENSULBAR_1,layer_CAT_SULBAR_2]);
+            resetLabels([layer_BatasKecamatan_1,layer_BatasKabupaten_2,layer_CekunganAirTanah_3]);
         });
         map.on("layerremove", function(){
-            resetLabels([layer_BtsKABUPATENSULBAR_1,layer_CAT_SULBAR_2]);
+            resetLabels([layer_BatasKecamatan_1,layer_BatasKabupaten_2,layer_CekunganAirTanah_3]);
         });
         </script>        
     </body>
