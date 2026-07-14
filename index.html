@@ -46,11 +46,11 @@
         <script src="data/BatasKabupaten_2.js"></script>
         <script src="data/CekunganAirTanah_3.js"></script>
         <script src="data/DataGeolistrik_4.js"></script>
-        <script src="data/DataSumur_5.js"></script>
+        <script src="data/TitikDataAirTanah_5.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:false, maxZoom:28, minZoom:1
-        }).fitBounds([[-2.474696847931027,119.05594009865702],[-2.1249444431719637,119.75808454896578]]);
+        }).fitBounds([[-3.4011966428790488,118.9818624559881],[-3.392317620491831,118.99985504097653]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -175,14 +175,6 @@
                     <tr>\
                         <th scope="row">Nama </th>\
                         <td>' + (feature.properties['NAMOBJ'] !== null ? autolinker.link(String(feature.properties['NAMOBJ']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Kabupaten</th>\
-                        <td>' + (feature.properties['WADMKK'] !== null ? autolinker.link(String(feature.properties['WADMKK']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Provinsi</th>\
-                        <td>' + (feature.properties['WADMPR'] !== null ? autolinker.link(String(feature.properties['WADMPR']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
@@ -361,7 +353,7 @@
         function style_DataGeolistrik_4_0() {
             return {
                 pane: 'pane_DataGeolistrik_4',
-                radius: 4.399999999999999,
+                radius: 4.4,
                 opacity: 1,
                 color: 'rgba(0,0,0,1.0)',
                 dashArray: '',
@@ -377,7 +369,7 @@
         function style_DataGeolistrik_4_1() {
             return {
                 pane: 'pane_DataGeolistrik_4',
-                radius: 2.062499999999999,
+                radius: 2.0625,
                 opacity: 1,
                 color: 'rgba(0,0,0,1.0)',
                 dashArray: '',
@@ -416,19 +408,22 @@
         ]});
         bounds_group.addLayer(layer_DataGeolistrik_4);
         map.addLayer(layer_DataGeolistrik_4);
-        function pop_DataSumur_5(feature, layer) {
+        function pop_TitikDataAirTanah_5(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
-                        <th scope="row">Tahun</th>\
-                        <td>' + (feature.properties['Tahun'] !== null ? autolinker.link(String(feature.properties['Tahun']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['Periode Pengambilan Data'] !== null ? autolinker.link(String(feature.properties['Periode Pengambilan Data']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Lokasi</th>\
-                        <td>' + (feature.properties['Nama Lokas'] !== null ? autolinker.link(String(feature.properties['Nama Lokas']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                        <th scope="row">Tahun Pengambilan Data</th>\
+                        <td>' + (feature.properties['Tahun Pengambilan Data'] !== null ? autolinker.link(String(feature.properties['Tahun Pengambilan Data']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Jenis Sumur</th>\
-                        <td>' + (feature.properties['Kategori S'] !== null ? autolinker.link(String(feature.properties['Kategori S']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                        <th scope="row">Nama Lokasi</th>\
+                        <td>' + (feature.properties['Nama Lokasi'] !== null ? autolinker.link(String(feature.properties['Nama Lokasi']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Kategori Sumur</th>\
+                        <td>' + (feature.properties['Kategori Sumur'] !== null ? autolinker.link(String(feature.properties['Kategori Sumur']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Warna</th>\
@@ -459,8 +454,16 @@
                         <td>' + (feature.properties['DO'] !== null ? autolinker.link(String(feature.properties['DO']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Muka Air Tanah (Satuan m)</th>\
-                        <td>' + (feature.properties['Muka Air T'] !== null ? autolinker.link(String(feature.properties['Muka Air T']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                        <th scope="row">Kedalaman Sumur</th>\
+                        <td>' + (feature.properties['Kedalaman Sumur'] !== null ? autolinker.link(String(feature.properties['Kedalaman Sumur']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Tinggi Muka Air Tanah</th>\
+                        <td>' + (feature.properties['Tinggi Muka Air Tanah'] !== null ? autolinker.link(String(feature.properties['Tinggi Muka Air Tanah']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Elevasi_ (m)</th>\
+                        <td>' + (feature.properties['Elevasi_ (m)'] !== null ? autolinker.link(String(feature.properties['Elevasi_ (m)']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
@@ -470,11 +473,11 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_DataSumur_5_0(feature) {
-            switch(String(feature.properties['Kategori S'])) {
-                case 'Mata Air':
+        function style_TitikDataAirTanah_5_0(feature) {
+            switch(String(feature.properties['Kategori_S'])) {
+                case 'Air Permukaan':
                     return {
-                pane: 'pane_DataSumur_5',
+                pane: 'pane_TitikDataAirTanah_5',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -484,13 +487,29 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(179,96,223,1.0)',
+                fillColor: 'rgba(42,134,233,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Mata Air':
+                    return {
+                pane: 'pane_TitikDataAirTanah_5',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(69,206,112,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Sumur Bor':
                     return {
-                pane: 'pane_DataSumur_5',
+                pane: 'pane_TitikDataAirTanah_5',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -500,13 +519,13 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(201,72,91,1.0)',
+                fillColor: 'rgba(204,125,235,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Sumur Gali':
                     return {
-                pane: 'pane_DataSumur_5',
+                pane: 'pane_TitikDataAirTanah_5',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -516,32 +535,48 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(211,218,69,1.0)',
+                fillColor: 'rgba(206,69,83,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_TitikDataAirTanah_5',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(197,207,119,1.0)',
                 interactive: true,
             }
                     break;
             }
         }
-        map.createPane('pane_DataSumur_5');
-        map.getPane('pane_DataSumur_5').style.zIndex = 405;
-        map.getPane('pane_DataSumur_5').style['mix-blend-mode'] = 'normal';
-        var layer_DataSumur_5 = new L.geoJson(json_DataSumur_5, {
+        map.createPane('pane_TitikDataAirTanah_5');
+        map.getPane('pane_TitikDataAirTanah_5').style.zIndex = 405;
+        map.getPane('pane_TitikDataAirTanah_5').style['mix-blend-mode'] = 'normal';
+        var layer_TitikDataAirTanah_5 = new L.geoJson(json_TitikDataAirTanah_5, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_DataSumur_5',
-            layerName: 'layer_DataSumur_5',
-            pane: 'pane_DataSumur_5',
-            onEachFeature: pop_DataSumur_5,
+            dataVar: 'json_TitikDataAirTanah_5',
+            layerName: 'layer_TitikDataAirTanah_5',
+            pane: 'pane_TitikDataAirTanah_5',
+            onEachFeature: pop_TitikDataAirTanah_5,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_DataSumur_5_0(feature));
+                return L.circleMarker(latlng, style_TitikDataAirTanah_5_0(feature));
             },
         });
-        bounds_group.addLayer(layer_DataSumur_5);
-        map.addLayer(layer_DataSumur_5);
+        bounds_group.addLayer(layer_TitikDataAirTanah_5);
+        map.addLayer(layer_TitikDataAirTanah_5);
         const url = {"Nominatim OSM": "https://nominatim.openstreetmap.org/search?format=geojson&addressdetails=1&",
         "France BAN": "https://api-adresse.data.gouv.fr/search/?"}
         var photonControl = L.control.photon({
@@ -596,7 +631,7 @@
             }
         });
         var overlaysTree = [
-            {label: 'Data Sumur<br /><table><tr><td style="text-align: center;"><img src="legend/DataSumur_5_MataAir0.png" /></td><td>Mata Air</td></tr><tr><td style="text-align: center;"><img src="legend/DataSumur_5_SumurBor1.png" /></td><td>Sumur Bor</td></tr><tr><td style="text-align: center;"><img src="legend/DataSumur_5_SumurGali2.png" /></td><td>Sumur Gali</td></tr></table>', layer: layer_DataSumur_5},
+            {label: 'Titik Data Air Tanah<br /><table><tr><td style="text-align: center;"><img src="legend/TitikDataAirTanah_5_AirPermukaan0.png" /></td><td>Air Permukaan</td></tr><tr><td style="text-align: center;"><img src="legend/TitikDataAirTanah_5_MataAir1.png" /></td><td>Mata Air</td></tr><tr><td style="text-align: center;"><img src="legend/TitikDataAirTanah_5_SumurBor2.png" /></td><td>Sumur Bor</td></tr><tr><td style="text-align: center;"><img src="legend/TitikDataAirTanah_5_SumurGali3.png" /></td><td>Sumur Gali</td></tr><tr><td style="text-align: center;"><img src="legend/TitikDataAirTanah_5_4.png" /></td><td></td></tr></table>', layer: layer_TitikDataAirTanah_5},
             {label: '<img src="legend/DataGeolistrik_4.png" /> Data Geolistrik', layer: layer_DataGeolistrik_4},
             {label: '<img src="legend/CekunganAirTanah_3.png" /> Cekungan Air Tanah', layer: layer_CekunganAirTanah_3},
             {label: '<img src="legend/BatasKabupaten_2.png" /> Batas Kabupaten', layer: layer_BatasKabupaten_2},
@@ -703,10 +738,10 @@
               i++;
         });
         map.addControl(new L.Control.Search({
-            layer: layer_DataSumur_5,
+            layer: layer_TitikDataAirTanah_5,
             initial: false,
             hideMarkerOnCollapse: true,
-            propertyName: 'Nama Lokas'}));
+            propertyName: 'Nama Lokasi'}));
         if (typeof url === 'undefined') {
             document.getElementsByClassName('search-button')[0].className += ' fa fa-binoculars';
         } else {
