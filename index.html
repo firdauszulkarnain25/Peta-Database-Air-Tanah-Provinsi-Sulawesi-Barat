@@ -411,9 +411,6 @@
         function pop_TitikDataAirTanah_5(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Periode Pengambilan Data'] !== null ? autolinker.link(String(feature.properties['Periode Pengambilan Data']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
                         <th scope="row">Tahun Pengambilan Data</th>\
                         <td>' + (feature.properties['Tahun Pengambilan Data'] !== null ? autolinker.link(String(feature.properties['Tahun Pengambilan Data']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
@@ -452,10 +449,6 @@
                     <tr>\
                         <th scope="row">DO</th>\
                         <td>' + (feature.properties['DO'] !== null ? autolinker.link(String(feature.properties['DO']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Kedalaman Sumur</th>\
-                        <td>' + (feature.properties['Kedalaman Sumur'] !== null ? autolinker.link(String(feature.properties['Kedalaman Sumur']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Tinggi Muka Air Tanah</th>\
